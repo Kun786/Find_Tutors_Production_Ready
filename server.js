@@ -7,6 +7,7 @@ const path = require('path');
 app.use(bodyParser.urlencoded({extended: true}));
 const cors = require("cors");
 app.use(cors());
+const port = process.env.PORT || 7000;
 
 const mongoose = require("./config/database");
 const stdAuthRouter = require("./routes/stdAuthRoutes");
@@ -43,6 +44,6 @@ function validateUser(req, res, next) {
   });
   
 
-app.listen(7000, function(err, res){
+app.listen(port, function(err, res){
     console.log("Server is Running on 7000 Port");
 })
