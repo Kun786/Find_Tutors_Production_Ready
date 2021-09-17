@@ -7,7 +7,7 @@ const path = require('path');
 app.use(bodyParser.urlencoded({extended: true}));
 const cors = require("cors");
 app.use(cors());
-const port = process.env.PORT || 7000;
+const port = process.env.PORT || 7171;
 
 const mongoose = require("./config/database");
 const stdAuthRouter = require("./routes/stdAuthRoutes");
@@ -22,22 +22,7 @@ app.use('/tutor', tutorAuthRouter);
 app.use('/admin', adminAuthRouter);
 app.use('/secure', adminSecureRoutes);
 
-function validateUser(req, res, next) {
-    jwt.verify(req.headers['x-access-token'], req.app.get('secretKey'), function(err, decoded) {
-      if (err) {
-        res.json({status:"error", message: err.message, data:null});
-      }
-      
-      else{
-        console.log(decoded);
-        // add user id to request
-      
-        req.body.userId = decoded.id;
-        next();
-      }
-    });
-    
-  }
+
   app.use(express.static(path.join(__dirname, '/frontEnd')));
   app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname + '/frontEnd/index.html'));
@@ -45,5 +30,5 @@ function validateUser(req, res, next) {
   
 
 app.listen(port, function(err, res){
-    console.log("Server is Running on 7000 Port");
+    console.log(`Server is Running on ${port} Port`);
 })
