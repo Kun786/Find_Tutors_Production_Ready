@@ -9,7 +9,7 @@ const cors = require("cors");
 app.use(cors());
 const port = process.env.PORT || 7171;
 
-const mongoose = require("./config/database");
+
 const stdAuthRouter = require("./routes/stdAuthRoutes");
 const parentAuthRouter = require("./routes/parentAuthRoutes");
 const tutorAuthRouter = require("./routes/tutorAuthRoutes");
